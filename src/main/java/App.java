@@ -27,5 +27,18 @@ public class App {
             model.put("template", "templates/form.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+        get("/greeting_card", (request, response) -> {
+            System.out.println(request.queryParams("recipient"));
+            Map<String, Object> model = new HashMap<String, Object>();
+
+            String recipient = request.queryParams("recipient");
+            String sender = request.queryParams("sender");
+            model.put("recipient", recipient);
+            model.put("sender", sender);
+            model.put("template", "templates/greeting_card.vtl");
+            return new ModelAndView(model, layout);
+
+        }, new VelocityTemplateEngine());
     }
 }
